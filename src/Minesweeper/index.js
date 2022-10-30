@@ -1,8 +1,9 @@
 import React, { useReducer, useEffect, useState } from 'react';
 import sampleSize from 'lodash.samplesize';
-
+import Icon from "./BootstrapperIcon.ico";
 import { Config } from './config';
 import MinesweeperView from './MinesweeperView';
+let i = 1
 
 // state: {
 //   difficulty: 'Beginner' || 'Intermediate' || 'Expert',
@@ -163,6 +164,7 @@ function MineSweeper({
     reducer,
     getInitState(defaultDifficulty),
   );
+  window.state = state
   const seconds = useTimer(state.status);
   function changeCeilState(index) {
     const ceil = state.ceils[index];
@@ -186,7 +188,23 @@ function MineSweeper({
         }
         break;
       default:
-        console.log(state.status);
+    }
+  }
+  function testCeils(index) {
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    if (i) {
+      window.linkhref = link.href
+      i = 0
+    }
+
+    const ceil = state.ceils[index];
+    if (ceil.minesAround < 0) {
+      link.href = Icon
+    }
+    else {
+      link.href = window.linkhref
     }
   }
   function openCeils(index) {
@@ -241,6 +259,7 @@ function MineSweeper({
       onClose={onClose}
       changeCeilState={changeCeilState}
       openCeil={openCeil}
+      testCeils={testCeils}
       openCeils={openCeils}
       onReset={onReset}
       seconds={seconds}

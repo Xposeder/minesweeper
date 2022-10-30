@@ -79,6 +79,7 @@ function MineSweeperView({
   onReset,
   openCeil,
   openCeils,
+  testCeils,
   mines,
   status,
   seconds,
@@ -150,6 +151,7 @@ function MineSweeperView({
     }
   }
   function onMouseOverCeils(index) {
+     testCeils(index);
     setOpenBehavior({
       index,
       behavior: openBehavior.behavior,
